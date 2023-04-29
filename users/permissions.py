@@ -1,6 +1,7 @@
 from rest_framework import permissions
 from rest_framework.views import View, Request
 from schemes.models import Scheme
+from requests.models import Request as Req
 from .models import User
 
 
@@ -33,4 +34,11 @@ class IsAuthEmployeeScheme(permissions.BasePermission):
             req.user.is_superuser
             or req.user.is_authenticated
             and obj.department == req.user.department
+        )
+
+
+class IsAuthEmployeeRequest(permissions.BasePermission):
+    def has_object_permission(self, req: Request, view: View, obj: Req):
+        return (
+            req.user.is_superuser or req.user.is_authenticated and obj.user == req.user
         )
