@@ -16,3 +16,15 @@ class User(AbstractUser):
         default=Role.COMMON,
     )
     is_default = models.BooleanField(default=True)
+
+    department = models.ForeignKey(
+        "departments.Department",
+        on_delete=models.CASCADE,
+        related_name="users",
+    )
+
+    position = models.ForeignKey(
+        "positions.Position",
+        on_delete=models.CASCADE,
+        related_name="users",
+    )

@@ -1,4 +1,6 @@
 from users.models import User
+from departments.models import Department
+from positions.models import Position
 from django.core.management.base import BaseCommand, CommandError
 
 
@@ -20,10 +22,15 @@ class Command(BaseCommand):
         if User.objects.filter(username=username).first():
             raise CommandError(f"Username `{username}` already taken.")
 
+        department = Department.objects.create(name="Administrativo")
+        position = Position.objects.create(name="Administrador")
+
         User.objects.create_superuser(
             username=username,
             password=password,
             role="Administrator",
+            department=department,
+            position=position,
         )
 
         self.stdout.write(
