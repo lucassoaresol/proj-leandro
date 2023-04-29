@@ -1,5 +1,6 @@
 from rest_framework import permissions
 from rest_framework.views import View, Request
+from schemes.models import Scheme
 from .models import User
 
 
@@ -24,3 +25,12 @@ class IsAuthRead(permissions.BasePermission):
 class IsAuthEmployee(permissions.BasePermission):
     def has_object_permission(self, req: Request, view: View, obj: User):
         return req.user.is_superuser or req.user.is_authenticated and obj == req.user
+
+
+class IsAuthEmployeeScheme(permissions.BasePermission):
+    def has_object_permission(self, req: Request, view: View, obj: Scheme):
+        return (
+            req.user.is_superuser
+            or req.user.is_authenticated
+            and obj.department == req.user.department
+        )
