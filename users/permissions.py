@@ -5,6 +5,14 @@ from requests.models import Request as Req
 from .models import User
 
 
+class IsAdminUserCreate(permissions.BasePermission):
+    def has_permission(self, req: Request, view: View):
+        if req.method == "POST":
+            return True
+
+        return req.user.is_superuser
+
+
 class IsAdminUserDestroy(permissions.BasePermission):
     def has_permission(self, req: Request, view: View):
         if req.method == "DELETE":
