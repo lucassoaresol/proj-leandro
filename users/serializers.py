@@ -39,6 +39,8 @@ class UserSerializer(serializers.ModelSerializer):
         if not position:
             position = Position.objects.create(**position_data)
 
+        position.departments.add(department)
+
         if validated_data.get("role") == "Administrator":
             user_obj = User.objects.create_superuser(
                 **validated_data,
@@ -86,12 +88,14 @@ class UserSerializer(serializers.ModelSerializer):
             "is_active",
             "is_default",
             "date_joined",
+            "date_expired",
             "department",
             "position",
         ]
         read_only_fields = [
             "is_default",
             "date_joined",
+            "date_expired",
         ]
         extra_kwargs = {
             "password": {"write_only": True},

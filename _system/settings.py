@@ -32,7 +32,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", False)
 
-ALLOWED_HOSTS = [".vercel.app"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -174,4 +174,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
-CORS_ALLOWED_ORIGINS = ["*"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]

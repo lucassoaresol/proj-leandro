@@ -9,6 +9,7 @@ class Status(models.TextChoices):
 
 class Scheme(models.Model):
     name = models.CharField(max_length=150)
+    min_criterion = models.IntegerField()
     status = models.CharField(
         max_length=20,
         choices=Status.choices,
