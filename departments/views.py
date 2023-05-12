@@ -7,7 +7,7 @@ from .models import Department
 
 
 class DepartmentView(generics.ListCreateAPIView):
-    queryset = Department.objects.all()
+    queryset = Department.objects.all().order_by("name")
     serializer_class = DepartmentSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsReleaseUserList]

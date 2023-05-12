@@ -7,7 +7,7 @@ from .models import Position
 
 
 class PositionView(generics.ListCreateAPIView):
-    queryset = Position.objects.all()
+    queryset = Position.objects.all().order_by("name")
     serializer_class = PositionSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsReleaseUserList]
