@@ -79,13 +79,13 @@ class UserSerializer(serializers.ModelSerializer):
             "role",
             "is_active",
             "is_default",
+            "is_expired",
             "date_joined",
             "date_expired",
             "department",
             "position",
         ]
         read_only_fields = [
-            "is_default",
             "date_joined",
             "date_expired",
         ]

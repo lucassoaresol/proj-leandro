@@ -17,6 +17,7 @@ class User(AbstractUser):
     )
     is_active = models.BooleanField(default=False)
     is_default = models.BooleanField(default=True)
+    is_expired = models.BooleanField(default=False)
     date_expired = models.DateTimeField(null=True)
 
     department = models.ForeignKey(
