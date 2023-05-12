@@ -30,6 +30,7 @@ class Command(BaseCommand):
             username=username,
             password=password,
             role="Administrator",
+            is_active=True,
             department=department,
             position=position,
         )

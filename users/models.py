@@ -15,6 +15,7 @@ class User(AbstractUser):
         choices=Role.choices,
         default=Role.COMMON,
     )
+    is_active = models.BooleanField(default=False)
     is_default = models.BooleanField(default=True)
     date_expired = models.DateTimeField(null=True)
 
