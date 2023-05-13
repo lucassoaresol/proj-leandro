@@ -38,3 +38,12 @@ class UserProfileView(generics.ListAPIView):
     def get_queryset(self):
         user_id = self.request.user.id
         return User.objects.filter(id=user_id)
+
+
+class UserUsernameView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        username = self.kwargs["username"]
+        return User.objects.filter(username__iexact=username).first()

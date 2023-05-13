@@ -15,6 +15,7 @@ def choices_error_message(choices_class):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    old_password = serializers.CharField(max_length=128, required=False)
     department = DepartmentSerializer()
     position = PositionSerializer()
 
@@ -48,6 +49,13 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
     def update(self, instance: User, validated_data: dict) -> User:
+        try:
+            old_password = validated_data.pop("old_password")
+            if old_password:
+                if not instance.check_password(old_password):
+                    raise ParseError("old password does not match")
+        except KeyError:
+            ...
         for key, value in validated_data.items():
             if not self.context["request"].user.is_superuser:
                 if key == "role":
@@ -72,6 +80,7 @@ class UserSerializer(serializers.ModelSerializer):
             "id",
             "username",
             "password",
+            "old_password",
             "first_name",
             "last_name",
             "email",
