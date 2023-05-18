@@ -56,6 +56,8 @@ MY_APPS = [
     "users",
     "departments",
     "positions",
+    "categories",
+    "options",
     "criterions",
     "schemes",
     "requests",

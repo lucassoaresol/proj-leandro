@@ -8,13 +8,12 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("criterions", "0001_initial"),
-        ("schemes", "0001_initial"),
+        ("categories", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name="Request",
+            name="Option",
             fields=[
                 (
                     "id",
@@ -25,23 +24,14 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("is_active", models.BooleanField(default=True)),
-                ("created_at", models.DateField(auto_now_add=True)),
-                ("canceled_at", models.DateField(null=True)),
+                ("name", models.CharField(max_length=150)),
+                ("value", models.IntegerField()),
                 (
-                    "criterion",
+                    "category",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="requests",
-                        to="criterions.criterion",
-                    ),
-                ),
-                (
-                    "scheme",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        related_name="requests",
-                        to="schemes.scheme",
+                        related_name="options",
+                        to="categories.category",
                     ),
                 ),
             ],

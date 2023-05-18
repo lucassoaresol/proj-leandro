@@ -9,7 +9,7 @@ class Status(models.TextChoices):
 
 class Scheme(models.Model):
     name = models.CharField(max_length=150)
-    min_criterion = models.IntegerField()
+    num_criterion = models.IntegerField()
     status = models.CharField(
         max_length=20,
         choices=Status.choices,
@@ -18,8 +18,12 @@ class Scheme(models.Model):
     created_at = models.DateField(auto_now_add=True)
     finished_at = models.DateField(null=True)
 
-    department = models.ForeignKey(
+    departments = models.ManyToManyField(
         "departments.Department",
-        on_delete=models.CASCADE,
+        related_name="schemes",
+    )
+
+    positions = models.ManyToManyField(
+        "positions.Position",
         related_name="schemes",
     )

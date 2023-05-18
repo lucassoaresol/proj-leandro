@@ -87,7 +87,7 @@ class UserSerializer(serializers.ModelSerializer):
             "phone",
             "role",
             "is_active",
-            "is_default",
+            "is_first_access",
             "is_expired",
             "date_joined",
             "date_expired",

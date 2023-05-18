@@ -30,14 +30,15 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
         instance.save()
 
 
-class UserProfileView(generics.ListAPIView):
+class UserProfileView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
     serializer_class = UserSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
+    def get_object(self):
         user_id = self.request.user.id
-        return User.objects.filter(id=user_id)
+        return User.objects.filter(id=user_id).first()
 
 
 class UserUsernameView(generics.RetrieveAPIView):

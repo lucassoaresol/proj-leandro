@@ -24,7 +24,7 @@ class Command(BaseCommand):
 
         department = Department.objects.create(name="Administrativo")
         position = Position.objects.create(name="Administrador")
-        department.positions.add(position)
+        position.departments.add(department)
 
         User.objects.create_superuser(
             username=username,

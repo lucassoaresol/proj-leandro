@@ -16,7 +16,7 @@ class User(AbstractUser):
         default=Role.COMMON,
     )
     is_active = models.BooleanField(default=False)
-    is_default = models.BooleanField(default=True)
+    is_first_access = models.BooleanField(default=False)
     is_expired = models.BooleanField(default=False)
     date_expired = models.DateTimeField(null=True)
 
