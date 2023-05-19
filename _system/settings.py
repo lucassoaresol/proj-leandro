@@ -185,4 +185,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
+CSRF_TRUSTED_ORIGINS = ["https://proj-leandro-app.vercel.app"]
+
 CORS_ALLOWED_ORIGINS = ["https://proj-leandro-app.vercel.app"]
