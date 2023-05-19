@@ -24,11 +24,13 @@ class Command(BaseCommand):
 
         department = Department.objects.create(name="Administrativo")
         position = Position.objects.create(name="Administrador")
+        position.departments.add(department)
 
         User.objects.create_superuser(
             username=username,
             password=password,
             role="Administrator",
+            is_active=True,
             department=department,
             position=position,
         )

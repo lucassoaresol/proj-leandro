@@ -9,13 +9,16 @@ class Role(models.TextChoices):
 
 
 class User(AbstractUser):
-    phone = models.CharField(max_length=150, null=True)
+    phone = models.CharField(max_length=150, default="")
     role = models.CharField(
         max_length=20,
         choices=Role.choices,
         default=Role.COMMON,
     )
-    is_default = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
+    is_first_access = models.BooleanField(default=False)
+    is_expired = models.BooleanField(default=False)
+    date_expired = models.DateTimeField(null=True)
 
     department = models.ForeignKey(
         "departments.Department",

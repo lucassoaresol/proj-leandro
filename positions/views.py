@@ -1,15 +1,16 @@
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser
+from users.permissions import IsReleaseUserList
 from .serializers import PositionSerializer
 from .models import Position
 
 
-class PositionView(generics.ListAPIView):
-    queryset = Position.objects.all()
+class PositionView(generics.ListCreateAPIView):
+    queryset = Position.objects.all().order_by("name")
     serializer_class = PositionSerializer
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsReleaseUserList]
 
 
 class PositionDetailView(generics.RetrieveUpdateDestroyAPIView):

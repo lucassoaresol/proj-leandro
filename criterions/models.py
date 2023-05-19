@@ -2,5 +2,9 @@ from django.db import models
 
 
 class Criterion(models.Model):
-    value = models.IntegerField()
     description = models.TextField()
+    category = models.ForeignKey(
+        "categories.Category",
+        on_delete=models.CASCADE,
+        related_name="criterions",
+    )
